@@ -12,4 +12,5 @@
     <string name="confiPassword">confirm Password</string>
     <string name="user_registration">User Registration</string>
     <string name="welcome">Welcome</string>
+    <string name="title_activity_check">checkActivity</string>
 </resources>
