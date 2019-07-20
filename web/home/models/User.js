@@ -18,7 +18,7 @@ var User = new Schema({
     },
     gender: {
         type: String,
-        required: true
+        required: false
     },
     password: {
         type: String,
@@ -32,9 +32,12 @@ var User = new Schema({
         type: String,
         default: "User"
     },
-    isActivated: {
-        type: Boolean,
-        default: false
+    location: {
+        type: String,
+        required: false
+    }, tags: {
+        type: String,
+        required: false
     }
 });
 module.exports = mongoose.model('User', User);

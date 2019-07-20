@@ -3,25 +3,28 @@
     <form method="post">
         <div style="padding: 15px;">
             <form method="post" action="/web/login">
-                <h1>Add a Organization :</h1>
-                <input name="name" class="form-control" type="text" placeholder="Enter organization name">
+                <h1>Edit Organization :</h1>
+                <input value="<%= data.name %>" name="name" class="form-control" type="text"
+                       placeholder="Enter organization name">
                 <br>
-                <input name="phoneNumber" class="form-control" type="number" placeholder="Enter number">
+                <input value="<%= data.phoneNumber %>" name="phoneNumber" class="form-control" type="number"
+                       placeholder="Enter number">
                 <br>
                 <div id="s_loc" class="btn btn-info" onclick="getLocation()">Set Your Location
                 </div>
                 <br>
-                <input type="hidden" name="location" id="loc">
+                <input value="<%= data.location %>" type="hidden" name="location" id="loc">
+                <br>
+                <input value="<%= data.email %>" name="email" class="form-control" type="text"
+                       placeholder="Enter organization email">
                 <br>
                 <input value="<%= data.tag %>" name="tag" class="form-control" type="text"
                        placeholder="Enter problems that organization deals with seperated by commas">
                 <br>
-                <input name="email" class="form-control" type="text" placeholder="Enter organization email">
-                <br>
-                <input name="password" class="form-control" type="password"
+                <input value="<%= data.password %>" name="password" class="form-control" type="password"
                        placeholder="Enter organization password">
                 <br>
-                <button class="offset-5 btn btn-success mt-3">Submit</button>
+                <button class="offset-5 btn btn-success mt-3">Update</button>
             </form>
         </div>
 

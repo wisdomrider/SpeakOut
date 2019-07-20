@@ -1,6 +1,5 @@
 const app = require("express").Router(),
     user = require("./models/User"),
-    org = require("./models/Org"),
     md5 = require("md5"),
     utils = require("./Utils").data;
 
@@ -27,25 +26,51 @@ app.post("/login", (req, res, next) => {
 app.get("/dash", utils.checkforAuth, (req, res, next) => {
     utils.render(res, "dash", {title: "Dashboard", active: "home"})
 });
+
+function handleError(res, e) {
+    console.log(e);
+    res.cookie(utils.constants.errorMessage, "Something went wrong !")
+        .redirect("/web/dash");
+}
+
 app.route("/org/add").get((req, res, next) => {
     utils.render(res, "add_org", {title: "Add organization", active: "add_org"})
 }).post((req, res, next) => {
-    org.create(req.body)
+    req.body.role = utils.constants.org;
+    req.body.password = md5(req.body.email + req.body.password);
+    user.create(req.body)
         .then((user, err) => {
-            if (err) utils.handleError(res, err);
+            if (err) handleError(res, err);
             else {
-                res.json({
-                    success: true,
-                    data: {
-                        token: req.body.token
-                    }
-                })
+                res.cookie(utils.constants.successMessage, "Organization added successfully !")
+                    .redirect("/web/org/list");
             }
 
-        }).catch(e => utils.handleError(res, e));
+        }).catch(e => handleError(res, e));
 });
 app.get("/org/list", (req, res, next) => {
-    utils.render(res, "list_org", {title: "Add organization", active: "list_org"})
+    user.find({role: "Org"}, (err, data) => {
+        if (err) handleError(res, err);
+        else {
+            utils.render(res, "list_org", {data: data})
+        }
+    });
+});
+app.route("/org/edit/:id").get((req, res, next) => {
+    user.findOne({_id: req.params.id}, (err, data) => {
+        if (err) handleError(res, err);
+        else {
+            utils.render(res, "edit_org", {data: data})
+        }
+    });
+}).post((req, res, next) => {
+    user.findOneAndUpdate({_id: req.params.id}, req.body, (err, data) => {
+        if (err) handleError(res, err);
+        else {
+            res.cookie(utils.constants.successMessage, "Organization added successfully !")
+                .redirect("/web/org/list");
+        }
+    })
 });
 app.route("/prob/add").get((req, res, next) => {
     utils.render(res, "add_prob", {title: "Add Problem", active: "add_prob"})

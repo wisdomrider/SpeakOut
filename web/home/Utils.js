@@ -23,7 +23,8 @@ h.handleError = (res, err) => {
 h.constants = {
     successMessage: "successMessage",
     errorMessage: "errorMessage",
-    warningMessage: "warningMessage"
+    warningMessage: "warningMessage",
+    org: "Org"
 };
 
 
