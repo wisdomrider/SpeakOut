@@ -1,6 +1,7 @@
 const app = require("express").Router(),
     user = require("./models/User"),
     md5 = require("md5"),
+    problem = require("./models/Problem"),
     utils = require("./Utils").data;
 
 
@@ -37,6 +38,36 @@ app.post("/login", (req, res, next) => {
                 } else res.status(406).json({success: false, message: "Username/Password not matched !"})
             } else res.status(406).json({success: false, message: "Username/Password not matched !"});
         });
+});
+
+function basicAuth(req, res, next) {
+    req.params.type = req.params.type.toLowerCase();
+    let auth = req.headers["authorization"];
+    if (auth.split("Bearer ").length < 2)
+        auth = null;
+    if (auth == null) {
+        res.status(406).json({success: false, message: "Unauthorized access !"});
+        return
+    }
+    utils.models.user.findOne({token: auth.split("Bearer ")[1]}, (err, user) => {
+        if (user) {
+            next.user = user;
+            next();
+        } else
+            res.status(406).json({success: false, message: "Unauthorized access !"})
+    });
+}
+
+
+app.post("/problem", basicAuth, (req, res, next) => {
+    problem.create(req.body).then((data, err) => {
+        if (err) utils.handleError(res, err);
+        else {
+            res.json({
+                success: true
+            })
+        }
+    });
 });
 
 module.exports = app;
