@@ -1,5 +1,6 @@
 const app = require("express").Router(),
     user = require("./models/User"),
+    org = require("./models/Org"),
     md5 = require("md5"),
     utils = require("./Utils").data;
 
@@ -24,7 +25,33 @@ app.post("/login", (req, res, next) => {
         });
 });
 app.get("/dash", utils.checkforAuth, (req, res, next) => {
-    utils.render(res, "dash", {title: "Dashboard"})
+    utils.render(res, "dash", {title: "Dashboard", active: "home"})
+});
+app.route("/org/add").get((req, res, next) => {
+    utils.render(res, "add_org", {title: "Add organization", active: "add_org"})
+}).post((req, res, next) => {
+    org.create(req.body)
+        .then((user, err) => {
+            if (err) utils.handleError(res, err);
+            else {
+                res.json({
+                    success: true,
+                    data: {
+                        token: req.body.token
+                    }
+                })
+            }
+
+        }).catch(e => utils.handleError(res, e));
+});
+app.get("/org/list", (req, res, next) => {
+    utils.render(res, "list_org", {title: "Add organization", active: "list_org"})
+});
+app.route("/prob/add").get((req, res, next) => {
+    utils.render(res, "add_prob", {title: "Add Problem", active: "add_prob"})
+});
+app.get("/prob/list", (req, res, next) => {
+    utils.render(res, "list_prob", {title: "Add Problem", active: "list_prob"})
 });
 
 
