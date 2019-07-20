@@ -1,13 +1,16 @@
 h = {};
 
 
+h.handleError = (res, err) => {
+    res.status(406).json({success: false, message: err.message});
+};
+
 h.constants = {
     successMessage: "successMessage",
     errorMessage: "errorMessage",
     warningMessage: "warningMessage"
 };
 
-h.models = {};
 
 h.render = (res, page, vars = {}) => {
     let successMessage = res.req.cookies[h.constants.successMessage];
@@ -24,7 +27,6 @@ h.render = (res, page, vars = {}) => {
     res.clearCookie(h.constants.errorMessage);
     res.render(page, vars);
 };
-
 
 
 module.exports.data = h;
