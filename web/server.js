@@ -11,6 +11,7 @@ var express = require("express"),
 //middlewares
 
 app.use(cookie());
+app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, 'views'));
 app.use("/", express.static(path.join(__dirname, "public")));
@@ -21,16 +22,16 @@ app.use(express.json());
 mongoose.set('useCreateIndex', true);
 
 // home routing
-app.get("/", (req, res, next) => {
-    utils.render(res, "check", {});
-});
 
+app.get("/", (req, res, next) => {
+    utils.render(res, "index", {title: ""});
+});
 
 
 //Routing starts
 
 app.use("/api", require("./home/ApiRouter"));
-
+app.use("/web", require("./home/webRouter"));
 
 
 //Error Handling
