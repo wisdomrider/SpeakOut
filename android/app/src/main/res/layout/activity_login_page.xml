@@ -19,6 +19,7 @@
             android:orientation="vertical"
             >
             <EditText
+
                 android:inputType="text"
                 android:hint="@string/user_name"
                 android:id="@+id/userName"
@@ -51,6 +52,7 @@
                 android:textColor="@color/black"
                 />
             <Button
+
                 android:text="@string/log_in"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"

@@ -11,5 +11,7 @@ public interface RetrofitInterface {
     @POST("register")
     Call<RegistrationModel> registerUser(@Body RegistrationModel registrationModel);
 
+    @POST("login")
+    Call<RegistrationModel> login(@Body RegistrationModel registrationModel);
 
 }

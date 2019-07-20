@@ -1,6 +1,7 @@
 package com.org.speakout.model;
 
-import com.org.speakout.model.Data;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class RegistrationModel {
 
@@ -9,6 +10,27 @@ public class RegistrationModel {
     private String phoneNumber;
     private String password;
     private String success;
+    @Expose
+    @SerializedName("username")
+    private String userName;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    private String message;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     private Data data;
 
