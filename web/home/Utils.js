@@ -1,13 +1,32 @@
+const user = require("./models/User");
 h = {};
 
+
+h.checkforAuth = (req, res, next) => {
+    let cookie = req.cookies["token"];
+    if (cookie == null) res.redirect("/");
+    else
+        user.findOne({"token": cookie})
+            .then((user, err) => {
+                if (err) h.handleError(res, err);
+                else if (user) {
+                    res.cookie("id", user._id, true);
+                    next();
+                } else res.redirect("/");
+            })
+};
+
+h.handleError = (res, err) => {
+    res.status(406).json({success: false, message: err.message});
+};
 
 h.constants = {
     successMessage: "successMessage",
     errorMessage: "errorMessage",
-    warningMessage: "warningMessage"
+    warningMessage: "warningMessage",
+    org: "Org"
 };
 
-h.models = {};
 
 h.render = (res, page, vars = {}) => {
     let successMessage = res.req.cookies[h.constants.successMessage];
@@ -24,7 +43,6 @@ h.render = (res, page, vars = {}) => {
     res.clearCookie(h.constants.errorMessage);
     res.render(page, vars);
 };
-
 
 
 module.exports.data = h;

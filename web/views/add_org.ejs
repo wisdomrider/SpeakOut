@@ -1,0 +1,46 @@
+<% include header.ejs %>
+<div class="main">
+    <form method="post">
+        <div style="padding: 15px;">
+            <form method="post" action="/web/login">
+                <h1>Add a Organization :</h1>
+                <input name="name" class="form-control" type="text" placeholder="Enter organization name">
+                <br>
+                <input name="phoneNumber" class="form-control" type="number" placeholder="Enter number">
+                <br>
+                <div id="s_loc" class="btn btn-info" onclick="getLocation()">Set Your Location
+                </div>
+                <br>
+                <input type="hidden" name="location" id="loc">
+                <br>
+                <input value="<%= data.tag %>" name="tag" class="form-control" type="text"
+                       placeholder="Enter problems that organization deals with seperated by commas">
+                <br>
+                <input name="email" class="form-control" type="text" placeholder="Enter organization email">
+                <br>
+                <input name="password" class="form-control" type="password"
+                       placeholder="Enter organization password">
+                <br>
+                <button class="offset-5 btn btn-success mt-3">Submit</button>
+            </form>
+        </div>
+
+    </form>
+</div>
+<% include footer.ejs %>
+<script>
+    var x = document.getElementById("loc");
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            alert("Geolocation is not supported.")
+        }
+    }
+
+    function showPosition(position) {
+        document.getElementById("s_loc").innerText = "Location Recorded"
+        x.value = position.coords.latitude + ":" + position.coords.longitude;
+    }
+</script>

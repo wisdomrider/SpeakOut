@@ -8,16 +8,33 @@ var express = require("express"),
     cookie = require("cookie-parser"),
     app = express();
 
-app.use(express.json());
+//middlewares
+
 app.use(cookie());
+app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.set('views', path.join(__dirname, 'views'));
 app.use("/", express.static(path.join(__dirname, "public")));
+app.use(express.json());
+
+
+//Mongo Options
+mongoose.set('useCreateIndex', true);
+
+// home routing
 
 app.get("/", (req, res, next) => {
-    utils.render(res, "check", {});
+    utils.render(res, "index", {title: ""});
 });
 
+
+//Routing starts
+
+app.use("/api", require("./home/ApiRouter"));
+app.use("/web", require("./home/webRouter"));
+
+
+//Error Handling
 
 app.use(function (req, res, next) {
     next(createError(404));
@@ -30,18 +47,21 @@ app.use(function (err, req, res, next) {
     res.render('error', {
         error: err
     });
+
 });
 
-// var conn = mongoose.connect(config.config, config.mongo);
-//
-// conn.then((db) => {
-//     console.log("Connected...")
-// }, (err) => console.log(err));
 
+// Mongo DB connection
+var conn = mongoose.connect("mongodb://localhost:27017/SpeakOut", {useNewUrlParser: true});
 
+conn.then((db) => {
+    console.log("DB Connected...")
+}, (err) => console.log(err));
+
+//node starts to listern on 3000 or default port
 
 app.listen(process.env.port || 3000, () => {
-    console.log("It's working fine !");
+    console.log("Port is working fine !");
 });
 
 
