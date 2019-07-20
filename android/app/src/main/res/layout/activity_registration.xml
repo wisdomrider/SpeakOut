@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context=".registration.RegistrationActivity">
+  <LinearLayout
+      android:layout_margin="8dp"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      >
+      <EditText
+          android:id="@+id/fullNameText"
+          android:inputType="text"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="@string/full_name"
+          />
+
+      <EditText
+          android:id="@+id/emailText"
+          android:hint="@string/email"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:inputType="textEmailAddress"
+          />
+
+      <EditText
+          android:id="@+id/phoneNumberText"
+          android:inputType="number"
+          android:hint="@string/phone_number"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          />
+
+      <EditText
+          android:id="@+id/password"
+          android:hint="@string/password"
+          android:inputType="textPassword"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" />
+
+      <EditText
+          android:id="@+id/confrimPasswordText"
+          android:hint="@string/confiPassword"
+          android:inputType="textPassword"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" />
+
+      <Button
+
+          android:layout_gravity="center"
+          android:text="@string/register"
+          android:id="@+id/button_register"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content" />
+
+  </LinearLayout>
+</ScrollView>
