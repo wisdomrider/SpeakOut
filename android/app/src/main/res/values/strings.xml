@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">SpeakOut</string>
+    <string name="home_page">Home Page</string>
+    <string name="title_activity_login_page">LoginPage</string>
+    <string name="user_name">Email / phone Number</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log in</string>
+    <string name="full_name">full Name</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="register">Register</string>
+    <string name="confiPassword">confirm Password</string>
+    <string name="user_registration">User Registration</string>
+    <string name="welcome">Welcome</string>
 </resources>
