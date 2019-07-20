@@ -23,8 +23,8 @@ app.post("/login", (req, res, next) => {
             } else notMatched(res)
         });
 });
-app.post("/dash", (req, res, next) => {
-
+app.get("/dash", utils.checkforAuth, (req, res, next) => {
+    utils.render(res, "dash", {title: "Dashboard"})
 });
 
 

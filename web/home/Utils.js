@@ -1,5 +1,20 @@
+const user = require("./models/User");
 h = {};
 
+
+h.checkforAuth = (req, res, next) => {
+    let cookie = req.cookies["token"];
+    if (cookie == null) res.redirect("/");
+    else
+        user.findOne({"token": cookie})
+            .then((user, err) => {
+                if (err) h.handleError(res, err);
+                else if (user) {
+                    res.cookie("id", user._id, true);
+                    next();
+                } else res.redirect("/");
+            })
+};
 
 h.handleError = (res, err) => {
     res.status(406).json({success: false, message: err.message});
