@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "819132371766",
+    "firebase_url": "https://speakout-1.firebaseio.com",
+    "project_id": "speakout-1",
+    "storage_bucket": "speakout-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:819132371766:android:6578ccee8db304be",
+        "android_client_info": {
+          "package_name": "com.org.speakout"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "819132371766-9dsm53kiurc5mai5apt09lsrejdumu3a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.org.speakout",
+            "certificate_hash": "67ba83f814e2b10d1cf3454677f530ac5659ebbd"
+          }
+        },
+        {
+          "client_id": "819132371766-i26qlicpemeo1bcvoq607otv2drgqp7p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtsOpDuDuZpdiKDUZKVYigweyjKbNKF7U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "819132371766-i26qlicpemeo1bcvoq607otv2drgqp7p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.org.speakout">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -9,21 +11,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".registration.RegistrationActivity"></activity>
+
+        <activity android:name=".registration.RegistrationActivity" />
         <activity
             android:name=".loginpage.LoginPage"
             android:label="@string/title_activity_login_page"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".splashscreen.SplashScreen">
+
+        </activity>
+        <activity
+            android:name=".HomePageActivity"
+            android:label="@string/home_page" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".HomePageActivity"
-            android:label="@string/home_page" />
     </application>
 
 </manifest>

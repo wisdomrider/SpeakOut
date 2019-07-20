@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
-import com.google.gson.Gson;
 import com.org.speakout.HomePageActivity;
 import com.org.speakout.R;
 import com.org.speakout.base.BaseActivity;
@@ -17,6 +17,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginPage extends BaseActivity {
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

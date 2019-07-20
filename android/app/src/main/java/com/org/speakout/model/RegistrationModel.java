@@ -10,9 +10,18 @@ public class RegistrationModel {
     private String phoneNumber;
     private String password;
     private String success;
+    private String gender;
     @Expose
     @SerializedName("username")
     private String userName;
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
     public String getMessage() {
         return message;
