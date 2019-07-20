@@ -1,6 +1,7 @@
 package com.org.speakout.registration;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,8 +41,8 @@ public class RegistrationActivity extends BaseActivity {
                     }
                     @Override
                     public void onFailure(Call<RegistrationModel> call, Throwable t) {
+                        Log.e("Error", t.getMessage());
                         Toast.makeText(RegistrationActivity.this, "Error on Registration", Toast.LENGTH_SHORT).show();
-
                     }
 
                 });

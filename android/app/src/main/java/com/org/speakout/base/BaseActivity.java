@@ -15,7 +15,7 @@ public class BaseActivity extends com.wisdomrider.Activities.BaseActivity {
     }
 
     private static Retrofit retrofit;
-    private static final String BASE_URL = "https://";
+    private static final String BASE_URL = "http://172.20.0.85:3000/api/";
 
     public static Retrofit getRetrofitInstance() {
         if (retrofit == null) {
