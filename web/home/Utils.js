@@ -1,6 +1,13 @@
 const user = require("./models/User");
 h = {};
 
+h.checkForAdmin = (req, res, next) => {
+    if (req.cookies["role"] !== "admin") {
+        res.cookie(h.constants.errorMessage, "You dont have this permission !")
+            .redirect("/web/dash");
+    } else next()
+};
+
 
 h.checkforAuth = (req, res, next) => {
     let cookie = req.cookies["token"];
@@ -10,7 +17,8 @@ h.checkforAuth = (req, res, next) => {
             .then((user, err) => {
                 if (err) h.handleError(res, err);
                 else if (user) {
-                    res.cookie("id", user._id, true);
+                    res.cookie("id", user._id, true)
+                        .cookie("role", user.role, true);
                     next();
                 } else res.redirect("/");
             })

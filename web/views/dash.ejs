@@ -1,3 +1,19 @@
 <% include header.ejs %>
+<% for(var i = 0; i < data.length ; i++) {
+    var problem = data[i];
+%>
 
+<% } if(data.length == 0){ %>
+    <div class="main card text-center">
+        <div class="card-header">
+            No Problems Available !
+        </div>
+        <div class="card-body">
+            <p class="card-text">There is no problem in your department.</p>
+        </div>
+        <div class="card-header">
+        </div>
+
+    </div>
+<% } %>
 <% include footer.ejs %>

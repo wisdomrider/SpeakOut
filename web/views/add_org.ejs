@@ -2,9 +2,9 @@
 <div class="main">
     <form method="post">
         <div style="padding: 15px;">
-            <form method="post" action="/web/login">
+            <form method="post">
                 <h1>Add a Organization :</h1>
-                <input name="name" class="form-control" type="text" placeholder="Enter organization name">
+                <input name="name" class="form-control" type="text" placeholder="Organization name">
                 <br>
                 <input name="phoneNumber" class="form-control" type="number" placeholder="Enter number">
                 <br>
@@ -13,8 +13,12 @@
                 <br>
                 <input type="hidden" name="location" id="loc">
                 <br>
-                <input value="<%= data.tag %>" name="tag" class="form-control" type="text"
-                       placeholder="Enter problems that organization deals with seperated by commas">
+                Issue organization is dealing with :
+                <select name="tags" class="form-control" multiple>
+                    <% for(var i = 0; i < data.length ; i++) { %>
+                        <option value="<%= data[i].name %>"><%= data[i].name %></option>
+                    <% } %>
+                </select>
                 <br>
                 <input name="email" class="form-control" type="text" placeholder="Enter organization email">
                 <br>

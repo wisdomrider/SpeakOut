@@ -2,7 +2,7 @@
 <div class="main">
     <form method="post">
         <div style="padding: 15px;">
-            <form method="post" action="/web/login">
+            <form method="post">
                 <h1>Edit Organization :</h1>
                 <input value="<%= data.name %>" name="name" class="form-control" type="text"
                        placeholder="Enter organization name">
@@ -15,11 +15,15 @@
                 <br>
                 <input value="<%= data.location %>" type="hidden" name="location" id="loc">
                 <br>
+                Issue organization is dealing with :
+                <select name="tags" class="form-control" multiple>
+                    <% for(var i = 0; i < list.length ; i++) { %>
+                        <option value="<%= list[i].name %>"><%= list[i].name %></option>
+                    <% } %>
+                </select>
+                <br>
                 <input value="<%= data.email %>" name="email" class="form-control" type="text"
                        placeholder="Enter organization email">
-                <br>
-                <input value="<%= data.tag %>" name="tag" class="form-control" type="text"
-                       placeholder="Enter problems that organization deals with seperated by commas">
                 <br>
                 <input value="<%= data.password %>" name="password" class="form-control" type="password"
                        placeholder="Enter organization password">

@@ -13,11 +13,44 @@
 
 </nav>
 <div class="sidenav">
-    <a href="/web/dash">Home</a>
-    <a href="/web/org/add">Add Organization</a>
-    <a href="/web/org/list">List Organization</a>
-    <a href="/web/prob/add">Add Problem</a>
-    <a href="/web/prob/list">List Problem</a>
+    <a <% if (active == "home"){ %>class="active" <% } %>href="/web/dash">Home</a>
+    <% if (role === "admin"){ %>
+        <a <% if (active == "add_org"){ %>class="active"
+                <% } %>
+           href="/web/org/add">Add Organization</a>
+        <a <% if (active == "list_org"){ %>class="active"
+                <% } %>
+           href="/web/org/list">List Organization</a>
+        <a <% if (active == "add"){ %>class="active"
+                <% } %>
+           href="/web/prob/add">Add Issue</a>
+        <a <% if (active == "list"){ %>class="active"
+                <% } %>
+           href="/web/prob/list">List Issue</a>
+    <% } %>
     <a href="/web/logout">Logout</a>
 </div>
 
+
+<script>
+
+    var firebaseConfig = {
+        apiKey: "AIzaSyCLMfpoA3T2bGWQVvN_7B7k52dIWf5Pyvg",
+        authDomain: "speakout-1.firebaseapp.com",
+        databaseURL: "https://speakout-1.firebaseio.com",
+        projectId: "speakout-1",
+        storageBucket: "",
+        messagingSenderId: "819132371766",
+        appId: "1:819132371766:web:24b48739284262b0"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+
+    const messaging = firebase.messaging();
+    messaging.requestPermission()
+        .then(() => {
+            console.log("okay")
+        })
+        .catch(() => console.log("nope"))
+</script>
