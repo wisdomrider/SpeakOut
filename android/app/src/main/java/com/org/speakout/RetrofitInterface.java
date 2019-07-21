@@ -10,15 +10,15 @@ import retrofit2.http.POST;
 public interface RetrofitInterface {
 
     @POST("register")
-    Call<RegistrationModel> registerUser(@Body RegistrationModel registrationModel);
+    Call<LoginPage.Response> registerUser(@Body RegistrationModel registrationModel);
 
     @POST("login")
-    Call<RegistrationModel> login(@Body RegistrationModel registrationModel);
+    Call<LoginPage.Response> login(@Body RegistrationModel registrationModel);
 
     @POST("problem")
     Call<RegistrationModel> postProblem(@Body RegistrationModel registrationModel);
 
     @GET("splash")
-    Call<RegistrationModel> getSplash();
+    Call<LoginPage.Response> getSplash();
 
 }

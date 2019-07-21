@@ -1,6 +1,4 @@
-package com.org.speakout.constance;
-
-import org.jetbrains.annotations.NotNull;
+package com.org.speakout.Constants;
 
 public class AppConstance {
     public static  final int SPLASH_DISPLAY_LENGTH = 1000;

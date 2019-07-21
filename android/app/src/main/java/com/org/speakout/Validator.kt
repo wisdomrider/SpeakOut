@@ -2,7 +2,7 @@ package com.org.speakout
 
 import android.text.InputType
 import android.widget.EditText
-import com.org.speakout.constance.AppConstance
+import com.org.speakout.Constants.AppConstance
 import java.util.*
 /*
 Created By WisdomRider(Avishek Adhikari)

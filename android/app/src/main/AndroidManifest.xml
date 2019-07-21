@@ -15,10 +15,6 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".registration.RegistrationActivity" />
-        <activity
-            android:name=".loginpage.LoginPage"
-            android:label="@string/title_activity_login_page"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".splashscreen.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,9 +24,6 @@
 
 
         </activity>
-        <activity android:name=".issueactivity.IssueActivity"
-            android:label="@string/add_issue"
-            />
         <activity
             android:name=".HomePageActivity"
             android:label="@string/home_page" >

@@ -1,0 +1,55 @@
+package com.org.speakout.loginpage
+
+import android.content.Intent
+import android.os.Bundle
+import android.view.View
+import android.widget.Toolbar
+import com.org.speakout.Constants.AppConstance
+import com.org.speakout.HomePageActivity
+import com.org.speakout.R
+import com.org.speakout.base.BaseActivity
+import com.org.speakout.model.RegistrationModel
+import com.org.speakout.registration.RegistrationActivity
+
+class LoginPage : BaseActivity() {
+    internal var toolbar: Toolbar? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_login_page)
+        validator.add(wisdom.editText(R.id.userName))
+        validator.add(wisdom.editText(R.id.password))
+        wisdom.textView(R.id.user_registration).setOnClickListener {
+            val intent = Intent(this@LoginPage, RegistrationActivity::class.java)
+            startActivity(intent)
+        }
+        wisdom.button(R.id.login_button).setOnClickListener(View.OnClickListener {
+            if (!validator.validate()) return@OnClickListener
+            login()
+        })
+    }
+
+    class Response(var data: Data)
+    class Data(var token: String?, var tags: ArrayList<Tag>, var problems: ArrayList<Problem>)
+    class Tag(var name: String)
+    class Problem()
+
+    private fun login() {
+        val registrationModel = RegistrationModel()
+        registrationModel.password = wisdom.editText(R.id.password).text.toString()
+        registrationModel.userName = wisdom.editText(R.id.userName).text.toString()
+        createTables()
+        api.login(registrationModel).get("Logging In !", object : Do {
+            override fun <T> Do(body: T?) {
+                val data = body as Response
+                sqliteClosedHelper.removeAll(Tag(""))
+                preferences.putString(AppConstance.TOKEN, data.data.token).apply()
+                sqliteClosedHelper.insertAll(data.data.tags)
+                startActivity(Intent(this@LoginPage, HomePageActivity::class.java))
+            }
+
+        })
+
+    }
+
+
+}
