@@ -3,7 +3,6 @@ package com.org.speakout.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.org.speakout.loginpage.LoginPage;
 
 import java.util.ArrayList;
 

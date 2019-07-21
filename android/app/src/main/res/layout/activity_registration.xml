@@ -1,86 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".registration.RegistrationActivity">
+    android:background="@drawable/gradient"
+    tools:context=".loginpage.LoginPage">
 
-    <androidx.cardview.widget.CardView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:padding="8dp"
-        app:cardCornerRadius="4dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/image_id"
+            android:src="@drawable/ic_bc"
+            android:layout_width="wrap_content"
+            android:layout_height="265dp"
+            />
+        <androidx.cardview.widget.CardView
             android:layout_margin="8dp"
+            android:padding="8dp"
+            android:layout_below="@id/image_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-            <EditText
-                android:id="@+id/fullNameText"
-                android:inputType="text"
+            android:layout_centerInParent="true"
+            app:cardCornerRadius="6dp">
+
+            <LinearLayout
+                android:layout_margin="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/full_name"
-                />
-
-            <EditText
-                android:id="@+id/emailText"
-                android:hint="@string/email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                />
-
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/gender_spinner"
+                android:orientation="vertical"
                 >
+                <EditText
+                    android:id="@+id/fullNameText"
+                    android:inputType="text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/full_name"
+                    />
+
+                <EditText
+                    android:id="@+id/emailText"
+                    android:hint="@string/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    />
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/gender_spinner"
+                    >
+                </Spinner>
+
+                <EditText
+                    android:id="@+id/phoneNumberText"
+                    android:inputType="number"
+                    android:hint="@string/phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+                <EditText
+                    android:id="@+id/password"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/confrimPasswordText"
+                    android:hint="@string/confiPassword"
+                    android:inputType="textPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center"
+                    android:text="@string/register"
+                    android:id="@+id/button_register"
+                    android:background="@color/green_primary"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+</ScrollView>
 
 
 
-            </Spinner>
 
 
-            <EditText
-                android:id="@+id/phoneNumberText"
-                android:inputType="number"
-                android:hint="@string/phone_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
-
-            <EditText
-                android:id="@+id/password"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:id="@+id/confrimPasswordText"
-                android:hint="@string/confiPassword"
-                android:inputType="textPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <Button
-
-                android:layout_gravity="center"
-                android:text="@string/register"
-                android:id="@+id/button_register"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
 
 
-    </androidx.cardview.widget.CardView>
 
-
-</RelativeLayout>

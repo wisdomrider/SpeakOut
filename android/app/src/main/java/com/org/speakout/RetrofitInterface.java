@@ -1,6 +1,5 @@
 package com.org.speakout;
 
-import com.org.speakout.loginpage.LoginPage;
 import com.org.speakout.model.RegistrationModel;
 
 import retrofit2.Call;
