@@ -1,4 +1,5 @@
 // Your web app's Firebase configuration
+
 var firebaseConfig = {
     apiKey: "AIzaSyCLMfpoA3T2bGWQVvN_7B7k52dIWf5Pyvg",
     authDomain: "speakout-1.firebaseapp.com",
@@ -25,7 +26,8 @@ messaging.requestPermission()
     })
     .then((token) => {
         if (getCookieValue("isUpdated") !== "yes") {
-            $.post("/web/update", {token: token}, function (data, status) {
+            console.log(token);
+            $.post("/web/update", {fcm: token}, function (data, status) {
                 console.log(status)
             });
         }

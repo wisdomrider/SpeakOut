@@ -32,6 +32,10 @@ var Problem = new Schema({
         type: Boolean,
         required: false,
         default: false
+    }, isSeen: {
+        type: Boolean,
+        required: false,
+        default: false
     }
 });
 module.exports = mongoose.model('Problem', Problem);
