@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.org.speakout.Constants.AppConstance
 import com.org.speakout.base.BaseActivity
@@ -12,10 +14,12 @@ import com.org.speakout.issueactivity.IssueActivity
 import com.org.speakout.loginpage.LoginPage
 import com.org.speakout.service.GetLocationClass
 import com.org.speakout.service.MyLocationInterface
+import kotlinx.android.synthetic.main.content_check.*
 
 class HomePageActivity : BaseActivity() {
     private var floatingActionButton: FloatingActionButton? = null
     internal lateinit var toolbar: Toolbar
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +27,8 @@ class HomePageActivity : BaseActivity() {
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         floatingActionButton = findViewById(R.id.fab)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+       // HomeRecyclerView(this).
         floatingActionButton!!.setOnClickListener {
             if (checkLocationPermission()) {
                 actualOpenIssueActivity()

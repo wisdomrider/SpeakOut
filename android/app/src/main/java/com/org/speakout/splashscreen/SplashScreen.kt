@@ -38,7 +38,9 @@ class SplashScreen : BaseActivity() {
             override fun <T> Do(body: T?) {
                 val data = body as LoginPage.Response
                 sqliteClosedHelper.removeAll(LoginPage.Tag(""))
+                sqliteClosedHelper.removeAll(LoginPage.Problem("",""))
                 sqliteClosedHelper.insertAll(data.data.tags)
+                sqliteClosedHelper.insertAll(data.data.problems)
                 startActivity(Intent(this@SplashScreen, HomePageActivity::class.java))
                 finish()
             }

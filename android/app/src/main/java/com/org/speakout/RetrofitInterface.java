@@ -1,5 +1,8 @@
 package com.org.speakout;
 
+import android.util.Log;
+
+import com.org.speakout.loginpage.LoginPage;
 import com.org.speakout.model.RegistrationModel;
 
 import retrofit2.Call;
@@ -16,9 +19,11 @@ public interface RetrofitInterface {
     Call<LoginPage.Response> login(@Body RegistrationModel registrationModel);
 
     @POST("problem")
-    Call<RegistrationModel> postProblem(@Body RegistrationModel registrationModel);
+    Call<LoginPage.Problem> postProblem(@Body RegistrationModel registrationModel);
 
     @GET("splash")
     Call<LoginPage.Response> getSplash();
+
+
 
 }

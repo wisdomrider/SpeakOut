@@ -27,8 +27,14 @@
         <activity
             android:name=".HomePageActivity"
             android:label="@string/home_page" >
-
         </activity>
+        <activity android:name=".loginpage.LoginPage"
+            android:label="@string/log_in"
+            />
+        <activity android:name=".issueactivity.IssueActivity"
+            />
+
+
     </application>
 
 </manifest>

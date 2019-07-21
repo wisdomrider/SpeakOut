@@ -54,6 +54,7 @@
         </Spinner>
 
         <ImageView
+            android:visibility="gone"
             android:layout_marginRight="8dp"
             android:id="@+id/problem_image"
             android:layout_width="match_parent"
@@ -93,6 +94,7 @@
         </LinearLayout>
 
         <Button
+
             android:textColor="@color/white"
             android:background="@color/green_primary"
             android:layout_marginRight="8dp"

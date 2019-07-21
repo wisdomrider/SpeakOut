@@ -18,7 +18,7 @@ class LoginPage : BaseActivity() {
         setContentView(R.layout.activity_login_page)
         validator.add(wisdom.editText(R.id.userName))
         validator.add(wisdom.editText(R.id.password))
-        wisdom.textView(R.id.user_registration).setOnClickListener {
+        wisdom.button(R.id.login_registration).setOnClickListener {
             val intent = Intent(this@LoginPage, RegistrationActivity::class.java)
             startActivity(intent)
         }
@@ -31,7 +31,8 @@ class LoginPage : BaseActivity() {
     class Response(var data: Data)
     class Data(var token: String?, var tags: ArrayList<Tag>, var problems: ArrayList<Problem>)
     class Tag(var name: String)
-    class Problem()
+    class Problem( var title:String, var description: String)
+
 
     private fun login() {
         val registrationModel = RegistrationModel()
