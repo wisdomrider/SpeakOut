@@ -4,19 +4,27 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.tv.TvContract;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.org.speakout.R;
 import com.org.speakout.RetrofitInterface;
 import com.org.speakout.Validator;
 import com.org.speakout.constance.AppConstance;
+import com.org.speakout.model.Tags;
 import com.wisdomrider.Utils.Preferences;
+import com.wisdomrider.sqliteclosedhelper.SqliteClosedHelper;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import okhttp3.Interceptor;
@@ -28,19 +36,25 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BaseActivity extends com.wisdomrider.Activities.BaseActivity {
     protected  Preferences preferences ;
+    public SqliteClosedHelper sqliteClosedHelper;
+
+    public static final int GALLERY_REQUEST = 256;
+    public static final int CAMARA_REQUEST = 109;
     protected  Validator validator = new Validator();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         preferences=new Preferences(this, AppConstance.APP_NAME, 0);
+        sqliteClosedHelper = new SqliteClosedHelper(this, AppConstance.APP_NAME);
         disableKeyboardAtFirst();
     }
 
 
-
     private static Retrofit retrofit;
-    private static final String BASE_URL = "http://a00324ec.ngrok.io/api/";
+    private static final String BASE_URL = "http://572c1941.ngrok.io/api/";
 
     public  Retrofit getRetrofitInstance() {
         if (retrofit == null) {
@@ -135,6 +149,16 @@ public class BaseActivity extends com.wisdomrider.Activities.BaseActivity {
         }
     }
 
+    public void createTables() {
+        sqliteClosedHelper.createTable(new Tags());
+
+    }
+
+
+    public void openIssueActivity() {
+
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -149,7 +173,7 @@ public class BaseActivity extends com.wisdomrider.Activities.BaseActivity {
                     if (ContextCompat.checkSelfPermission(this,
                             Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
-
+                        openIssueActivity();
                         //Request location updates:
 
                     }
@@ -165,4 +189,13 @@ public class BaseActivity extends com.wisdomrider.Activities.BaseActivity {
 
         }
     }
+
+    protected void insertintoTables(ArrayList<Tags> tags) {
+
+
+    }
+
+
+
+
 }

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".checkActivity">
+    >
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -30,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_add_circle_black_24dp" />
+        app:srcCompat="@drawable/ic_add_circle_black_24dp"
+        tools:ignore="VectorDrawableCompat" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

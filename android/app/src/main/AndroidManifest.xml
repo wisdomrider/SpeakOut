@@ -3,6 +3,8 @@
     package="com.org.speakout">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -20,6 +22,9 @@
         <activity android:name=".splashscreen.SplashScreen">
 
         </activity>
+        <activity android:name=".issueactivity.IssueActivity"
+            android:label="@string/add_issue"
+            />
         <activity
             android:name=".HomePageActivity"
             android:label="@string/home_page" >
@@ -28,6 +33,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 

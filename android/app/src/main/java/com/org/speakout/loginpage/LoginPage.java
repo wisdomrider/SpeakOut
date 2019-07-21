@@ -10,7 +10,10 @@ import com.org.speakout.HomePageActivity;
 import com.org.speakout.R;
 import com.org.speakout.base.BaseActivity;
 import com.org.speakout.model.RegistrationModel;
+import com.org.speakout.model.Tags;
 import com.org.speakout.registration.RegistrationActivity;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,10 +49,12 @@ public class LoginPage extends BaseActivity {
         RegistrationModel registrationModel = new RegistrationModel();
         registrationModel.setPassword(wisdom.editText(R.id.password).getText().toString());
         registrationModel.setUserName(wisdom.editText(R.id.userName).getText().toString());
+        createTables();
         getRequest().login(registrationModel).enqueue(new Callback<RegistrationModel>() {
             @Override
             public void onResponse(Call<RegistrationModel> call, Response<RegistrationModel> response) {
                 if (response.code() == 200) {
+                    insertintoTables(response.body().getTags());
                     Intent intent = new Intent(LoginPage.this, HomePageActivity.class);
                     hideProgressBar();
                     startActivity(intent);
@@ -66,5 +71,10 @@ public class LoginPage extends BaseActivity {
                 Toast.makeText(LoginPage.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    protected void insertintoTables(ArrayList<Tags> tags) {
+        sqliteClosedHelper.insertAll(tags);
     }
 }
