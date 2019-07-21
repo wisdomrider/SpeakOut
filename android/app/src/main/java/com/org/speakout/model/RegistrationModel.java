@@ -1,10 +1,11 @@
 package com.org.speakout.model;
 
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.org.speakout.loginpage.LoginPage;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RegistrationModel {
 
@@ -15,16 +16,21 @@ public class RegistrationModel {
     private String success;
     private String gender;
     private String photo;
-    private String tag;
-    private ArrayList<Tags> tags;
 
-    public ArrayList<Tags> getTags() {
+    private String tag;
+
+
+    public ArrayList<LoginPage.Tag> tags;
+
+
+    public ArrayList<LoginPage.Tag> getTags() {
         return tags;
     }
 
-    public void setTags(ArrayList<Tags> tags) {
+    public void setTags(ArrayList<LoginPage.Tag> tags) {
         this.tags = tags;
     }
+
 
     public String getPhoto() {
         return photo;
