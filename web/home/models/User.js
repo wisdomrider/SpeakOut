@@ -38,6 +38,9 @@ var User = new Schema({
     }, tags: {
         type: String,
         required: false
+    }, fcm: {
+        required: false,
+        type: String
     }
 });
 module.exports = mongoose.model('User', User);

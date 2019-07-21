@@ -1,5 +1,6 @@
 const app = require("express").Router(),
     user = require("./models/User"),
+    issue = require("./models/Issue"),
     md5 = require("md5"),
     problem = require("./models/Problem"),
     utils = require("./Utils").data;
@@ -13,12 +14,21 @@ app.post("/register", (req, res, next) => {
         .then((user, err) => {
             if (err) utils.handleError(res, err);
             else {
-                res.json({
-                    success: true,
-                    data: {
-                        token: req.body.token
+                issue.find({}, ["name"], (err, tags) => {
+                    if (err) res.status(406).json({success: false});
+                    else {
+                        problem.find({isApproved: true}, (err, problems) => {
+                            res.json({
+                                success: true,
+                                data: {
+                                    token: req.body.token,
+                                    tags: tags,
+                                    problems: problems
+                                }
+                            })
+                        })
                     }
-                })
+                });
             }
 
         }).catch(e => utils.handleError(res, e));
@@ -29,10 +39,19 @@ app.post("/login", (req, res, next) => {
             if (err) utils.handleError(res, err);
             else if (user) {
                 if (user.password === md5(user.email + req.body.password)) {
-                    res.json({
-                        success: true,
-                        data: {
-                            token: user.token
+                    issue.find({}, ["name"], (err, tags) => {
+                        if (err) res.status(406).json({success: false});
+                        else {
+                            problem.find({isApproved: true}, (err, problems) => {
+                                res.json({
+                                    success: true,
+                                    data: {
+                                        token: user.token,
+                                        tags: tags,
+                                        problems: problems
+                                    }
+                                })
+                            })
                         }
                     })
                 } else res.status(406).json({success: false, message: "Username/Password not matched !"})
@@ -40,8 +59,9 @@ app.post("/login", (req, res, next) => {
         });
 });
 
-function basicAuth(req, res, next) {
+function bearerToken(req, res, next) {
     req.params.type = req.params.type.toLowerCase();
+
     let auth = req.headers["authorization"];
     if (auth.split("Bearer ").length < 2)
         auth = null;
@@ -59,7 +79,7 @@ function basicAuth(req, res, next) {
 }
 
 
-app.post("/problem", basicAuth, (req, res, next) => {
+app.post("/problem", bearerToken, (req, res, next) => {
     problem.create(req.body).then((data, err) => {
         if (err) utils.handleError(res, err);
         else {
@@ -69,5 +89,23 @@ app.post("/problem", basicAuth, (req, res, next) => {
         }
     });
 });
+
+app.get("/splash", bearerToken, (req, res, next) => {
+
+    issue.find({}, ["name"], (err, tags) => {
+        if (err) res.status(406).json({success: false});
+        else {
+            problem.find({isApproved: true}, (err, problems) => {
+                res.json({
+                    success: true, data: {
+                        tags: tags,
+                        problems: problems
+                    }
+                })
+            })
+        }
+    })
+});
+
 
 module.exports = app;
