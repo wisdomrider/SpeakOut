@@ -32,8 +32,12 @@ class HomePageActivity : BaseActivity() {
         val adapter = HomeRecyclerView(this)
         recyclerView.adapter = adapter
         floatingActionButton!!.setOnClickListener {
+            showProgessBar("Updating your Location")
             if (checkLocationPermission()) {
                 actualOpenIssueActivity()
+
+            } else {
+                closeProgressBar()
             }
         }
     }
@@ -65,12 +69,12 @@ class HomePageActivity : BaseActivity() {
 
 
     internal fun actualOpenIssueActivity() {
+        closeProgressBar()
         val getLocationClass = GetLocationClass()
         getLocationClass.start(this@HomePageActivity, MyLocationInterface { latitude, longitude -> openIssueActivity(latitude.toString(), longitude.toString()) })
     }
 
     private fun openIssueActivity(lats: String, longs: String) {
-
         val intent = Intent(this, IssueActivity::class.java)
         intent.putExtra(AppConstance.LATS, lats)
         intent.putExtra(AppConstance.LONG, longs)
