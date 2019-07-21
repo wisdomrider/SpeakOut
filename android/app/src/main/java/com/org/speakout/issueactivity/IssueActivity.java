@@ -21,9 +21,6 @@ import com.org.speakout.R;
 import com.org.speakout.base.BaseActivity;
 import com.org.speakout.constance.AppConstance;
 import com.org.speakout.model.RegistrationModel;
-import com.org.speakout.model.Tags;
-
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
