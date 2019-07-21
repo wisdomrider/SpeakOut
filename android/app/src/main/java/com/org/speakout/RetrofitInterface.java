@@ -4,6 +4,7 @@ import com.org.speakout.model.RegistrationModel;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface RetrofitInterface {
@@ -13,5 +14,11 @@ public interface RetrofitInterface {
 
     @POST("login")
     Call<RegistrationModel> login(@Body RegistrationModel registrationModel);
+
+    @POST("problem")
+    Call<RegistrationModel> postProblem(@Body RegistrationModel registrationModel);
+
+    @GET("splash")
+    Call<RegistrationModel> getSplash();
 
 }

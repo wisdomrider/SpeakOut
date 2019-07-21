@@ -3,6 +3,9 @@ package com.org.speakout.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RegistrationModel {
 
     private String name;
@@ -11,6 +14,70 @@ public class RegistrationModel {
     private String password;
     private String success;
     private String gender;
+    private String photo;
+    private String tag;
+    private ArrayList<Tags> tags;
+
+    public ArrayList<Tags> getTags() {
+        return tags;
+    }
+
+    public void setTags(ArrayList<Tags> tags) {
+        this.tags = tags;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    private String title;
+    private String desc;
+    private String timestamp;
+    private String location;
     @Expose
     @SerializedName("username")
     private String userName;

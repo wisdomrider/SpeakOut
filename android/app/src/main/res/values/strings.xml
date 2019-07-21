@@ -13,4 +13,10 @@
     <string name="user_registration">User Registration</string>
     <string name="welcome">Welcome</string>
     <string name="title_activity_check">checkActivity</string>
+    <string name="enter_title">Title</string>
+    <string name="gallery">Gallery</string>
+    <string name="camara">Camera</string>
+    <string name="report_issue">Report Issue</string>
+    <string name="description">Description</string>
+    <string name="add_issue">Add Issue</string>
 </resources>

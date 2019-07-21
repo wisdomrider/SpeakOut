@@ -14,6 +14,7 @@ import com.org.speakout.R;
 import com.org.speakout.base.BaseActivity;
 import com.org.speakout.constance.AppConstance;
 import com.org.speakout.model.RegistrationModel;
+import com.org.speakout.model.Tags;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +64,6 @@ public class RegistrationActivity extends BaseActivity {
         validator.add(wisdom.editText(R.id.phoneNumberText));
         validator.add(wisdom.editText(R.id.password));
         validator.add(wisdom.editText(R.id.confrimPasswordText));
-
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,10 +76,12 @@ public class RegistrationActivity extends BaseActivity {
                 registrationModel.setEmail(wisdom.editText(R.id.emailText).getText().toString());
                 registrationModel.setPhoneNumber(wisdom.editText(R.id.phoneNumberText).getText().toString());
                 registrationModel.setPassword(wisdom.editText(R.id.password).getText().toString());
+                createTables();
                 getRequest().registerUser(registrationModel).enqueue(new Callback<RegistrationModel>() {
                     @Override
                     public void onResponse(Call<RegistrationModel> call, Response<RegistrationModel> response) {
                         if (response.code() == 200) {
+                            insertintoTables(response.body().getTags());
                             preferences.edit().putString(AppConstance.TOKEN, response.body().getData().getToken()).apply();
                             preferences.edit().putString(AppConstance.ROLE, "USER").apply();
                             hideProgressBar();
@@ -98,5 +100,10 @@ public class RegistrationActivity extends BaseActivity {
                 });
             }
         });
+    }
+
+    @Override
+    protected void insertintoTables(ArrayList<Tags> tags) {
+        sqliteClosedHelper.insertAll(tags);
     }
 }

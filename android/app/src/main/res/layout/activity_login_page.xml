@@ -17,8 +17,8 @@
         <ImageView
             android:scaleType="centerCrop"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/background_icon" />
+            android:layout_height="250dp"
+             />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
