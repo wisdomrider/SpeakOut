@@ -4,6 +4,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script src="/assets/jquery.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.7.1/firebase-messaging.js"></script>
+<script src="/assets/firebase.js"></script>
 
 <nav class="navbar navbar-dark bg-primary" style="color:white;">
 
@@ -12,6 +15,8 @@
     </a>
 
 </nav>
+
+
 <div class="sidenav">
     <a <% if (active == "home"){ %>class="active" <% } %>href="/web/dash">Home</a>
     <% if (role === "admin"){ %>
@@ -31,26 +36,3 @@
     <a href="/web/logout">Logout</a>
 </div>
 
-
-<script>
-
-    var firebaseConfig = {
-        apiKey: "AIzaSyCLMfpoA3T2bGWQVvN_7B7k52dIWf5Pyvg",
-        authDomain: "speakout-1.firebaseapp.com",
-        databaseURL: "https://speakout-1.firebaseio.com",
-        projectId: "speakout-1",
-        storageBucket: "",
-        messagingSenderId: "819132371766",
-        appId: "1:819132371766:web:24b48739284262b0"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-
-
-    const messaging = firebase.messaging();
-    messaging.requestPermission()
-        .then(() => {
-            console.log("okay")
-        })
-        .catch(() => console.log("nope"))
-</script>

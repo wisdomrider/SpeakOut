@@ -1,5 +1,8 @@
 <% include header.ejs %>
 <div class="main">
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZ2nfVhxwcAagjUeQ50NiDiN2dQDHTypA"></script>
+    <script src="https://unpkg.com/location-picker/dist/location-picker.min.js"></script>
     <form method="post">
         <div style="padding: 15px;">
             <form method="post">
@@ -9,9 +12,6 @@
                 <br>
                 <input value="<%= data.phoneNumber %>" name="phoneNumber" class="form-control" type="number"
                        placeholder="Enter number">
-                <br>
-                <div id="s_loc" class="btn btn-info" onclick="getLocation()">Set Your Location
-                </div>
                 <br>
                 <input value="<%= data.location %>" type="hidden" name="location" id="loc">
                 <br>
@@ -46,8 +46,4 @@
         }
     }
 
-    function showPosition(position) {
-        document.getElementById("s_loc").innerText = "Location Recorded"
-        x.value = position.coords.latitude + ":" + position.coords.longitude;
-    }
 </script>

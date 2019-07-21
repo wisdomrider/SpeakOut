@@ -1,7 +1,8 @@
 const app = require("express").Router(),
     user = require("./models/User"),
     md5 = require("md5"),
-    problem = require("./models/Issue"),
+    issue = require("./models/Issue"),
+    problem = require("./models/Problem"),
     utils = require("./Utils").data;
 
 
@@ -67,7 +68,7 @@ function handleError(res, e) {
 
 app.route("/org/add").get(utils.checkForAdmin, (req, res, next) => {
     req.body.tags = Array(req.body.tags).join(",");
-    problem.find({}, (err, data) => {
+    issue.find({}, (err, data) => {
         if (err) handleError(res, err);
         else {
             utils.render(res, "add_org", {
@@ -104,7 +105,7 @@ app.route("/org/edit/:id").get(utils.checkForAdmin, (req, res, next) => {
     user.findOne({_id: req.params.id}, async (err, data) => {
         if (err) handleError(res, err);
         else {
-            await problem.find({}, (err, data1) => {
+            await issue.find({}, (err, data1) => {
                 if (err) handleError(res, err);
                 else {
                     utils.render(res, "edit_org", {
@@ -130,14 +131,14 @@ app.route("/org/edit/:id").get(utils.checkForAdmin, (req, res, next) => {
 });
 
 app.route("/prob/edit/:id").get(utils.checkForAdmin, (req, res, next) => {
-    problem.findOne({_id: req.params.id}, (err, data) => {
+    issue.findOne({_id: req.params.id}, (err, data) => {
         if (err) handleError(res, err);
         else {
             utils.render(res, "edit_prob", {data: data, active: "add", role: req.cookies["role"]})
         }
     });
 }).post(utils.checkForAdmin, (req, res, next) => {
-    problem.findOneAndUpdate({_id: req.params.id}, req.body, (err, data) => {
+    issue.findOneAndUpdate({_id: req.params.id}, req.body, (err, data) => {
         if (err) handleError(res, err);
         else {
             res.cookie(utils.constants.successMessage, "Problem edited successfully !")
@@ -150,7 +151,7 @@ app.route("/prob/add").get(utils.checkForAdmin, (req, res, next) => {
     utils.render(res, "add_prob", {title: "Add Problem", active: "add", role: req.cookies["role"]})
 }).post(utils.checkForAdmin, (req, res, next) => {
     req.body.createdBy = req.cookies["id"];
-    problem.create(req.body)
+    issue.create(req.body)
         .then((data, err) => {
             if (err) handleError(res, err);
             else {
@@ -160,7 +161,7 @@ app.route("/prob/add").get(utils.checkForAdmin, (req, res, next) => {
         })
 });
 app.get("/prob/list", utils.checkForAdmin, (req, res, next) => {
-    problem.find({}, async (err, data) => {
+    issue.find({}, async (err, data) => {
         if (err) handleError(res, err);
         else {
             for (let i = 0; i < data.length; i++) {
@@ -176,7 +177,7 @@ app.get("/prob/list", utils.checkForAdmin, (req, res, next) => {
 });
 
 app.get("/prob/delete/:id", utils.checkForAdmin, (req, res, next) => {
-    problem.remove({_id: req.params.id}, (err) => {
+    issue.remove({_id: req.params.id}, (err) => {
         res.cookie(utils.constants.successMessage, "Problem deleted successfully !")
             .redirect("/web/prob/list");
     });
@@ -191,6 +192,14 @@ app.get("/org/delete/:id", utils.checkForAdmin, (req, res, next) => {
 app.get("/logout", (req, res, next) => {
     res.clearCookie("token")
         .redirect("/");
+});
+app.post("/update", (req, res, next) => {
+    user.findOneAndUpdate({_id: req.cookies["id"]}, req.body, (err, data) => {
+        if (err) res.json({success: false});
+        else {
+            res.cookie("isUpdated", "yes").json({success: true})
+        }
+    });
 });
 
 module.exports = app;
