@@ -1,36 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/gradient"
     tools:context=".loginpage.LoginPage">
 
     <RelativeLayout
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <ImageView
-            android:scaleType="centerCrop"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-             />
-
+            android:id="@+id/image_id"
+            android:src="@drawable/ic_bc"
+            android:layout_width="wrap_content"
+            android:layout_height="265dp"
+            />
         <androidx.cardview.widget.CardView
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="1dp"
+            android:layout_below="@+id/image_id"
+            android:layout_margin="16dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:layout_centerInParent="true"
             android:padding="8dp"
-            app:cardCornerRadius="4dp">
+            app:cardCornerRadius="6dp">
 
             <LinearLayout
+                android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_margin="16dp"
                 android:orientation="vertical">
 
                 <EditText
@@ -54,28 +60,33 @@
                     android:layout_gravity="center"
                     android:visibility="gone" />
 
-                <TextView
-                    android:id="@+id/user_registration"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/user_registration"
-                    android:textColor="@color/black" />
 
                 <Button
-
+                    android:layout_marginTop="8dp"
                     android:id="@+id/login_button"
-                    android:layout_width="wrap_content"
+                    android:background="@color/green_primary"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/log_in" />
-
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:text="@string/log_in"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    />
+                <Button
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/white"
+                    android:id="@+id/login_registration"
+                    android:background="@color/blue_primary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textAllCaps="false"
+                    android:text="@string/register" />
             </LinearLayout>
-
-
         </androidx.cardview.widget.CardView>
-
-
     </RelativeLayout>
-</LinearLayout>
+</ScrollView>

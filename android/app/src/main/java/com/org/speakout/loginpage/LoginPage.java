@@ -27,7 +27,7 @@ public class LoginPage extends BaseActivity {
         setContentView(R.layout.activity_login_page);
         validator.add(wisdom.editText(R.id.userName));
         validator.add(wisdom.editText(R.id.password));
-        wisdom.textView(R.id.user_registration).setOnClickListener(new View.OnClickListener() {
+        wisdom.button(R.id.login_registration).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginPage.this, RegistrationActivity.class);

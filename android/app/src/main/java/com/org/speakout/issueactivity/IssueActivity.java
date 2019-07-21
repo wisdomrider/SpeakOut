@@ -137,8 +137,6 @@ public class IssueActivity extends BaseActivity {
 
                 }
                 break;
-
-
                 }
     }
 
