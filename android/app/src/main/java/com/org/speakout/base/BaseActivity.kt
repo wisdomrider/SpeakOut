@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.WindowManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.firebase.storage.FirebaseStorage
 import com.org.speakout.Constants.AppConstance
 import com.org.speakout.RetrofitInterface
 import com.org.speakout.Validator
@@ -32,11 +33,11 @@ open class BaseActivity : com.wisdomrider.Activities.BaseActivity() {
     lateinit var retrofit: Retrofit
     lateinit var api: RetrofitInterface
     var progess: ProgressDialog? = null
-
-
+    lateinit var storage: FirebaseStorage
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         preferences = Preferences(this, AppConstance.APP_NAME, 0)
+        storage= FirebaseStorage.getInstance()
         sqliteClosedHelper = SqliteClosedHelper(this, AppConstance.APP_NAME)
         disableKeyboardAtFirst()
         val logging = HttpLoggingInterceptor()
@@ -65,12 +66,12 @@ open class BaseActivity : com.wisdomrider.Activities.BaseActivity() {
     }
 
 
-    fun closeProgressBar() {
+   public fun closeProgressBar() {
         if (progess != null)
             progess!!.cancel()
     }
 
-    private fun showProgessBar(cont: String) {
+    public fun showProgessBar(cont: String) {
         if (progess == null)
             progess = ProgressDialog(this)
         progess!!.setCancelable(false)
@@ -181,6 +182,7 @@ open class BaseActivity : com.wisdomrider.Activities.BaseActivity() {
 
     fun createTables() {
         sqliteClosedHelper.createTable(LoginPage.Tag(""))
+        sqliteClosedHelper.createTable(LoginPage.Problem("",""))
     }
 
 

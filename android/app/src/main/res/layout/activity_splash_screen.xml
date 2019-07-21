@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
   <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
@@ -21,6 +20,8 @@
           android:layout_centerInParent="true"
           />
       <ProgressBar
+          android:layout_below="@id/image_id"
+          android:layout_centerInParent="true"
 
           android:id="@+id/pbHeaderProgress"
           android:layout_gravity="center"
