@@ -66,7 +66,9 @@ class RegistrationActivity : BaseActivity() {
                 override fun <T> Do(body: T?) {
                     val data = body as LoginPage.Response
                     sqliteClosedHelper.removeAll(LoginPage.Tag(""))
+                    sqliteClosedHelper.removeAll(LoginPage.Problem("", ""))
                     sqliteClosedHelper.insertAll(data.data.tags)
+                    sqliteClosedHelper.insertAll(data.data.problems)
                     preferences.putString(AppConstance.TOKEN, data.data.token).apply()
                     val intent = Intent(this@RegistrationActivity, HomePageActivity::class.java)
                     startActivity(intent)

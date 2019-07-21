@@ -31,7 +31,7 @@ class LoginPage : BaseActivity() {
     class Response(var data: Data)
     class Data(var token: String?, var tags: ArrayList<Tag>, var problems: ArrayList<Problem>)
     class Tag(var name: String)
-    class Problem( var title:String, var description: String)
+    class Problem( var title:String, var desc: String)
 
 
     private fun login() {
@@ -43,14 +43,12 @@ class LoginPage : BaseActivity() {
             override fun <T> Do(body: T?) {
                 val data = body as Response
                 sqliteClosedHelper.removeAll(Tag(""))
+                sqliteClosedHelper.removeAll(Problem("",""))
                 preferences.putString(AppConstance.TOKEN, data.data.token).apply()
                 sqliteClosedHelper.insertAll(data.data.tags)
+                sqliteClosedHelper.insertAll(data.data.problems)
                 startActivity(Intent(this@LoginPage, HomePageActivity::class.java))
             }
-
         })
-
     }
-
-
 }

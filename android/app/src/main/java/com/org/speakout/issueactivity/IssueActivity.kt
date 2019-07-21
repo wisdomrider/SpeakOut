@@ -38,7 +38,6 @@ class IssueActivity : BaseActivity() {
         setContentView(R.layout.activity_issue)
         camarabutton = findViewById(R.id.button_upload_camara)
         val r = sqliteClosedHelper.getAll(LoginPage.Tag(""))
-        issueList.add(0, "Isssue")
         for (x in r) {
             issueList.add(x.name);
         }
