@@ -22,11 +22,14 @@ to the authorized representative.
  
 ## For Android 
 
-   application is located in android folder just create a branch and start working there .
+   application is located in android branch.
   
 ## For WEB
 
-   web application is located in web folder just create a branch and start working there.
+   web application is located in web branch.
+   
+   
+## For development purpose or api use https://speakoutt.herokuapp.com/api/ as base url
   
 # LANGUAGE USED :
 
