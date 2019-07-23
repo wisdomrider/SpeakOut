@@ -52,7 +52,7 @@ app.use(function (err, req, res, next) {
 
 
 // Mongo DB connection
-var conn = mongoose.connect("mongodb://localhost:27017/SpeakOut", {useNewUrlParser: true});
+var conn = mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true});
 
 conn.then((db) => {
     console.log("DB Connected...")
