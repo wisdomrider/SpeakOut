@@ -1,4 +1,4 @@
-## SPEAK OUT 
+# SPEAK OUT 
 
 Focusing on social cause our project is about developing a platform where all the issue of social violence, can be post 
 as a complain or request to the representative organization or the representative authority. Different organization, 
@@ -16,3 +16,20 @@ In similar way many other requests, complains can be post on different issues ha
 to the authorized representative.
 
 
+# ANYONE CAN CONTRIBUTE TO THIS PROJECT JUST FOLLOW THIS STEPS
+
+   First clone this project
+ 
+## For Android 
+
+   application is located in android folder just create a branch and start working there .
+  
+## For WEB
+
+   web application is located in web folder just create a branch and start working there.
+  
+# LANGUAGE USED :
+
+  ## NODE.JS
+  ## KOTLIN
+  ## JAVA
