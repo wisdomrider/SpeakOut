@@ -39,9 +39,7 @@ open class BaseActivity : com.wisdomrider.Activities.BaseActivity() {
         preferences = Preferences(this, AppConstance.APP_NAME, 0)
         storage= FirebaseStorage.getInstance()
         sqliteClosedHelper = SqliteClosedHelper(this, AppConstance.APP_NAME)
-
         disableKeyboardAtFirst()
-
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
         val httpClient = OkHttpClient.Builder()
@@ -225,11 +223,14 @@ open class BaseActivity : com.wisdomrider.Activities.BaseActivity() {
 
     }
 
+
+
+
     companion object {
         const val GALLERY_REQUEST = 256
         const val CAMARA_REQUEST = 109
         private var retrofit: Retrofit? = null
-        private val BASE_URL = "http://05430758.ngrok.io/api/"
+        private val BASE_URL = "https://speakout.herokuapp.com/api/"
         const val MY_PERMISSIONS_REQUEST_LOCATION = 99
     }
 

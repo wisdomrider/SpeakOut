@@ -16,25 +16,21 @@
 
         <activity android:name=".registration.RegistrationActivity" />
         <activity android:name=".splashscreen.SplashScreen">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity
-            android:name=".HomePageActivity"
+            android:name=".MainActivity"
             android:label="@string/home_page" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
         </activity>
         <activity android:name=".loginpage.LoginPage"
             android:label="@string/log_in"
             />
-        <activity android:name=".issueactivity.IssueActivity"
-            />
-
-
+        <activity android:name=".issueactivity.IssueActivity" />
     </application>
 
 </manifest>

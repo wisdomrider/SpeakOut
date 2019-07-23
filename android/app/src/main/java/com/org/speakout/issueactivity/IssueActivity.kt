@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -14,9 +13,7 @@ import android.widget.*
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.android.gms.tasks.Task
 import com.org.speakout.Constants.AppConstance
-import com.org.speakout.HomePageActivity
 import com.org.speakout.R
 import com.org.speakout.base.BaseActivity
 import com.org.speakout.loginpage.LoginPage
@@ -39,17 +36,12 @@ class IssueActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_issue)
         camarabutton = findViewById(R.id.button_upload_camara)
-        try {
+
             val tags = sqliteClosedHelper.getAll(LoginPage.Tag(""))
             for (x in tags) {
                 issueList.add(x.name);
             }
-        } catch (e:android.database.sqlite.SQLiteException) {
-            issueList.add("Accident")
-            issueList.add("harassment")
-            issueList.add("Corruption")
-            issueList.add("Police case")
-        }
+
 
         lats = intent.getStringExtra(AppConstance.LATS)
         longs = intent.getStringExtra(AppConstance.LONG)
@@ -79,7 +71,7 @@ class IssueActivity : BaseActivity() {
             Log.e("MyToken", mytoken)
             api.postProblem(registrationModel).get("Upding Problem on Server", object : Do {
                 override fun <T> Do(body: T?) {
-                   /* val intent = Intent(this@IssueActivity, HomePageActivity::class.java)
+                   /* val intent = Intent(this@IssueActivity, MainActivity::class.java)
                     startActivity(intent)
                    */
                     onBackPressed()
@@ -89,7 +81,7 @@ class IssueActivity : BaseActivity() {
         }
     }
 
-    protected fun checkGalaryPermision() {
+     fun checkGalaryPermision() {
         try {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE), BaseActivity.Companion.GALLERY_REQUEST)
@@ -190,13 +182,11 @@ class IssueActivity : BaseActivity() {
                     imageView.setImageBitmap(bitmap)
                     closeProgressBar()
                 }
-
                 //imageView.setImageURI(bitmap);
 
             } catch (e: Exception) {
 
             }
-
         }
 
     }

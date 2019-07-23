@@ -4,51 +4,41 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.FrameLayout
 import androidx.appcompat.widget.Toolbar
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.org.speakout.Constants.AppConstance
 import com.org.speakout.base.BaseActivity
+import com.org.speakout.fragments.HomePageFragment
 import com.org.speakout.issueactivity.IssueActivity
 import com.org.speakout.loginpage.LoginPage
 import com.org.speakout.service.GetLocationClass
 import com.org.speakout.service.MyLocationInterface
-import kotlinx.android.synthetic.main.content_check.*
-
-class HomePageActivity : BaseActivity() {
-
+class MainActivity : BaseActivity() {
     private var floatingActionButton: FloatingActionButton? = null
-    internal lateinit var toolbar: Toolbar
-    var arrayList = ArrayList<LoginPage.Problem>()
+    private lateinit var toolbar: Toolbar
+    private lateinit var container: FrameLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         toolbar = findViewById(R.id.toolbar)
-        try {
-            arrayList = sqliteClosedHelper.getAll(LoginPage.Problem("", "", "",""))
-
-        }catch (e:android.database.SQLException) {
-            for (i in 0..10) {
-              var page =   LoginPage.Problem("Simple Title","Some description of mine","","")
-                arrayList.add(page)
-            }
-        }
+        supportFragmentManager.beginTransaction().add(R.id.container, HomePageFragment().getInstance(this),
+                "Home Page").commit()
         setSupportActionBar(toolbar)
         floatingActionButton = findViewById(R.id.fab)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        val adapter = HomeRecyclerView(this)
-        recyclerView.adapter = adapter
+
         floatingActionButton!!.setOnClickListener {
             showProgessBar("Updating your Location")
             if (checkLocationPermission()) {
                 actualOpenIssueActivity()
-
             } else {
                 closeProgressBar()
             }
         }
     }
+
+    
 
     override fun onBackPressed() {
         finishAffinity()
@@ -81,7 +71,7 @@ class HomePageActivity : BaseActivity() {
     internal fun actualOpenIssueActivity() {
         closeProgressBar()
         val getLocationClass = GetLocationClass()
-        getLocationClass.start(this@HomePageActivity, MyLocationInterface { latitude, longitude -> openIssueActivity(latitude.toString(), longitude.toString()) })
+        getLocationClass.start(this@MainActivity, MyLocationInterface { latitude, longitude -> openIssueActivity(latitude.toString(), longitude.toString()) })
     }
 
     private fun openIssueActivity(lats: String, longs: String) {
@@ -100,3 +90,6 @@ class HomePageActivity : BaseActivity() {
         actualOpenIssueActivity()
     }
 }
+
+
+

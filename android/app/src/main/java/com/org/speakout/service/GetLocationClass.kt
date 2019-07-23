@@ -1,15 +1,13 @@
 package com.org.speakout.service
 
 import android.annotation.SuppressLint
-import android.app.Service
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
-import com.org.speakout.HomePageActivity
+import com.org.speakout.MainActivity
 
 class GetLocationClass : GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
         com.google.android.gms.location.LocationListener {
@@ -18,7 +16,7 @@ class GetLocationClass : GoogleApiClient.ConnectionCallbacks, GoogleApiClient.On
     private var mLocationRequest: LocationRequest? = null
     lateinit var myLocationInterface: MyLocationInterface;
 
-    fun start(home: HomePageActivity, myInterface: MyLocationInterface ) {
+    fun start(home: MainActivity, myInterface: MyLocationInterface ) {
         this.myLocationInterface = myInterface
 
         mGoogleApiClient = GoogleApiClient.Builder(home)

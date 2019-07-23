@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toolbar
 import com.org.speakout.Constants.AppConstance
-import com.org.speakout.HomePageActivity
+import com.org.speakout.MainActivity
 import com.org.speakout.R
 import com.org.speakout.base.BaseActivity
 import com.org.speakout.model.RegistrationModel
@@ -48,7 +48,7 @@ class LoginPage : BaseActivity() {
                 preferences.putString(AppConstance.TOKEN, data.data.token).apply()
                 sqliteClosedHelper.insertAll(data.data.tags)
                 sqliteClosedHelper.insertAll(data.data.problems)
-                startActivity(Intent(this@LoginPage, HomePageActivity::class.java))
+                startActivity(Intent(this@LoginPage, MainActivity::class.java))
             }
         })
     }

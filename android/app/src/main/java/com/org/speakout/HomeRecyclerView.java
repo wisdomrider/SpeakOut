@@ -6,16 +6,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
+import com.org.speakout.fragments.HomePageFragment;
+
 import androidx.annotation.NonNull;
 
 public class HomeRecyclerView extends androidx.recyclerview.widget.RecyclerView.Adapter<HomeRecyclerView.MyViewHolder> {
 
 
-    private HomePageActivity homePageActivity;
+    private HomePageFragment homeFragment;
 
-    HomeRecyclerView(HomePageActivity homePageActivity) {
+    public HomeRecyclerView(HomePageFragment homeFragment) {
 
-       this.homePageActivity  = homePageActivity;
+       this.homeFragment = homeFragment;
     }
 
 
@@ -28,13 +30,13 @@ public class HomeRecyclerView extends androidx.recyclerview.widget.RecyclerView.
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.title.setText(this.homePageActivity.getArrayList().get(position).getTitle());
-        holder.description.setText(this.homePageActivity.getArrayList().get(position).getDesc());
+        holder.title.setText(this.homeFragment.getArrayList().get(position).getTitle());
+        holder.description.setText(this.homeFragment.getArrayList().get(position).getDesc());
     }
 
     @Override
     public int getItemCount() {
-        return this.homePageActivity.getArrayList().size();
+        return this.homeFragment.getArrayList().size();
     }
 
     public static class MyViewHolder extends androidx.recyclerview.widget.RecyclerView.ViewHolder {

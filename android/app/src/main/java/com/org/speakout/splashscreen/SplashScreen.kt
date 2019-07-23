@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import com.org.speakout.Constants.AppConstance
-import com.org.speakout.HomePageActivity
+import com.org.speakout.MainActivity
 import com.org.speakout.R
 import com.org.speakout.base.BaseActivity
 import com.org.speakout.loginpage.LoginPage
@@ -41,7 +41,7 @@ class SplashScreen : BaseActivity() {
                 sqliteClosedHelper.removeAll(LoginPage.Problem("","", "", ""))
                 sqliteClosedHelper.insertAll(data.data.tags)
                 sqliteClosedHelper.insertAll(data.data.problems)
-                startActivity(Intent(this@SplashScreen, HomePageActivity::class.java))
+                startActivity(Intent(this@SplashScreen, MainActivity::class.java))
                 finish()
             }
         }, on406 = object : Do {
