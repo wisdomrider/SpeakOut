@@ -60,8 +60,6 @@ app.post("/login", (req, res, next) => {
 });
 
 function bearerToken(req, res, next) {
-    req.params.type = req.params.type.toLowerCase();
-
     let auth = req.headers["authorization"];
     if (auth.split("Bearer ").length < 2)
         auth = null;
@@ -69,7 +67,7 @@ function bearerToken(req, res, next) {
         res.status(406).json({success: false, message: "Unauthorized access !"});
         return
     }
-    utils.models.user.findOne({token: auth.split("Bearer ")[1]}, (err, user) => {
+    user.findOne({token: auth.split("Bearer ")[1]}, (err, user) => {
         if (user) {
             next.user = user;
             next();
@@ -80,14 +78,28 @@ function bearerToken(req, res, next) {
 
 
 app.post("/problem", bearerToken, (req, res, next) => {
+    req.body.createdBy = next.user._id;
     problem.create(req.body).then((data, err) => {
+        user.find({tags: {"$in": [req.body.tag]}, role: "Org"}, (err, data1) => {
+            for (let i = 0; i < data1.length; i++) {
+                x = data1[i];
+                if (x.fcm !== null && x.fcm !== "") {
+                    let request = require('request');
+                    request('https://wisdomriderr.shop/fcm.php?to=' + x.fcm + '&body=You have a issue !', function (error, response, body) {
+                        if (!error && response.statusCode == 200) {
+
+                        }
+                    })
+                }
+            }
+        });
         if (err) utils.handleError(res, err);
         else {
             res.json({
                 success: true
             })
         }
-    });
+    }).catch(e => console.log(e));
 });
 
 app.get("/splash", bearerToken, (req, res, next) => {

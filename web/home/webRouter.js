@@ -197,8 +197,20 @@ app.post("/update", (req, res, next) => {
     user.findOneAndUpdate({_id: req.cookies["id"]}, req.body, (err, data) => {
         if (err) res.json({success: false});
         else {
-            res.cookie("isUpdated", "yes").json({success: true})
+            res.cookie("isUpdatedd", "yes").json({success: true})
         }
+    });
+});
+app.get("/mark/:id", (req, res, next) => {
+    problem.findOneAndUpdate({_id: req.params.id}, {isSeen: true}, (err, next) => {
+        res.cookie(utils.constants.successMessage, "Problem mark as read !")
+            .redirect("/web/dash");
+    });
+});
+app.get("/approve/:id", (req, res, next) => {
+    problem.findOneAndUpdate({_id: req.params.id}, {isApproved: true}, (err, next) => {
+        res.cookie(utils.constants.successMessage, "Problem approved for user to read !")
+            .redirect("/web/dash");
     });
 });
 
