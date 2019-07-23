@@ -60,7 +60,7 @@ conn.then((db) => {
 
 //node starts to listern on 3000 or default port
 
-app.listen(process.env.port || 3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log("Port is working fine !");
 });
 
