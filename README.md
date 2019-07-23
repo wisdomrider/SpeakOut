@@ -29,7 +29,8 @@ to the authorized representative.
    web application is located in web branch.
    
    
-## For development purpose or api use https://speakoutt.herokuapp.com/api/ as base url
+## For development purpose of android 
+ ## use https://speakoutt.herokuapp.com/api/ as base url
   
 # LANGUAGE USED :
 
@@ -38,3 +39,4 @@ to the authorized representative.
   ## JAVA
 
 For any help contact avishekzone@gmail.com
+
