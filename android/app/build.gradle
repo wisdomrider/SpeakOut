@@ -28,7 +28,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
-    implementation 'com.github.wisdomrider:wisdomrider:2.4.0'
+    implementation 'com.github.wisdomrider:wisdomrider:2.5.0'
 
     implementation 'androidx.cardview:cardview:1.0.0-beta01'
     implementation 'androidx.recyclerview:recyclerview:1.0.0-beta01'

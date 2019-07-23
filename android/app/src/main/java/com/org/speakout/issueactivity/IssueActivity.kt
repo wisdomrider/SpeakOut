@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -13,6 +14,7 @@ import android.widget.*
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.android.gms.tasks.Task
 import com.org.speakout.Constants.AppConstance
 import com.org.speakout.HomePageActivity
 import com.org.speakout.R
@@ -23,24 +25,32 @@ import java.io.ByteArrayOutputStream
 import java.io.InputStream
 
 class IssueActivity : BaseActivity() {
-    internal lateinit var toolbar: Toolbar
-    internal lateinit var imageView: ImageView
-    internal lateinit var galaryButton: Button
-    internal lateinit var lats: String
-    internal lateinit var longs: String
-    internal lateinit var spinner: Spinner
-    internal lateinit var camarabutton: Button
-    internal lateinit var urlString: String;
-    internal var issueList: ArrayList<String> = ArrayList()
+    private lateinit var toolbar: Toolbar
+    private lateinit var imageView: ImageView
+    private lateinit var galaryButton: Button
+    private lateinit var lats: String
+    private lateinit var longs: String
+    private lateinit var spinner: Spinner
+    private lateinit var camarabutton: Button
+    private lateinit var urlString: String;
+    private var issueList: ArrayList<String> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_issue)
         camarabutton = findViewById(R.id.button_upload_camara)
-        val r = sqliteClosedHelper.getAll(LoginPage.Tag(""))
-        for (x in r) {
-            issueList.add(x.name);
+        try {
+            val tags = sqliteClosedHelper.getAll(LoginPage.Tag(""))
+            for (x in tags) {
+                issueList.add(x.name);
+            }
+        } catch (e:android.database.sqlite.SQLiteException) {
+            issueList.add("Accident")
+            issueList.add("harassment")
+            issueList.add("Corruption")
+            issueList.add("Police case")
         }
+
         lats = intent.getStringExtra(AppConstance.LATS)
         longs = intent.getStringExtra(AppConstance.LONG)
         spinner = findViewById(R.id.issue_list)
@@ -63,7 +73,7 @@ class IssueActivity : BaseActivity() {
             registrationModel.location = "$lats:$longs"
             registrationModel.title = wisdom.editText(R.id.editTextTitle).text.toString()
             registrationModel.desc = wisdom.editText(R.id.editTextDescription).text.toString()
-            registrationModel.photo = ""
+            registrationModel.photo = urlString
             registrationModel.tag = spinner.selectedItem.toString()
             val mytoken = preferences.getString(AppConstance.TOKEN, "notes")
             Log.e("MyToken", mytoken)
@@ -121,7 +131,7 @@ class IssueActivity : BaseActivity() {
                     //do something like displaying a message that he didn`t allow the app to access gallery and you wont be able to let him select from gallery
                 }
 
-            CAMARA_REQUEST -> if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            CAMARA_REQUEST -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 val intent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
                 startActivityForResult(intent, CAMARA_REQUEST)
             } else {
@@ -145,13 +155,13 @@ class IssueActivity : BaseActivity() {
                     var uploadTask = storage.getReference("${System.currentTimeMillis()}.png").putBytes(data)
                     showProgessBar("uploading")
                     uploadTask.addOnFailureListener {
-                    }.addOnSuccessListener { s ->
+                    }.addOnSuccessListener {
+                        it.metadata!!.reference!!.downloadUrl.addOnSuccessListener {
+                            urlString = it.toString()
+                        }
+
                         imageView.visibility
                         closeProgressBar()
-                        Log.e("slog", s.toString())
-                        //urlString = s.metadata.u
-                        //generatedFilePath = downloadUri.toString()
-                        //val downloadUri = s.getMetadata().getDownloadUrl();
                         imageView.setImageURI(selectedImage)
                         imageView.visibility = View.VISIBLE
                     }
@@ -171,9 +181,12 @@ class IssueActivity : BaseActivity() {
                 var uploadTask = storage.getReference("${System.currentTimeMillis()}.png").putBytes(data)
                 showProgessBar("Uploading Image")
                 uploadTask.addOnFailureListener {
-                }.addOnSuccessListener { s ->
+                }.addOnSuccessListener {
+                    it.metadata!!.reference!!.downloadUrl.addOnSuccessListener {
+                      urlString = it.toString()
+
+                   }
                     imageView.visibility = View.VISIBLE
-                    Log.e("slog", s.toString())
                     imageView.setImageBitmap(bitmap)
                     closeProgressBar()
                 }

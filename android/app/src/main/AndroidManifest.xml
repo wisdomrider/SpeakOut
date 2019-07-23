@@ -16,17 +16,17 @@
 
         <activity android:name=".registration.RegistrationActivity" />
         <activity android:name=".splashscreen.SplashScreen">
+        </activity>
+
+        <activity
+            android:name=".HomePageActivity"
+            android:label="@string/home_page" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-
-        </activity>
-        <activity
-            android:name=".HomePageActivity"
-            android:label="@string/home_page" >
         </activity>
         <activity android:name=".loginpage.LoginPage"
             android:label="@string/log_in"

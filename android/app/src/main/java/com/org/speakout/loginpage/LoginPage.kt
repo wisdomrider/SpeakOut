@@ -10,6 +10,7 @@ import com.org.speakout.R
 import com.org.speakout.base.BaseActivity
 import com.org.speakout.model.RegistrationModel
 import com.org.speakout.registration.RegistrationActivity
+import com.wisdomrider.sqliteclosedhelper.SqliteAnnotations
 
 class LoginPage : BaseActivity() {
     internal var toolbar: Toolbar? = null
@@ -30,8 +31,8 @@ class LoginPage : BaseActivity() {
 
     class Response(var data: Data)
     class Data(var token: String?, var tags: ArrayList<Tag>, var problems: ArrayList<Problem>)
-    class Tag(var name: String)
-    class Problem( var title:String, var desc: String)
+    class Tag(@SqliteAnnotations.Primary var name: String)
+    class Problem( var title:String, var desc: String, var timeStamp: String, var photoUrl: String)
 
 
     private fun login() {
@@ -43,7 +44,7 @@ class LoginPage : BaseActivity() {
             override fun <T> Do(body: T?) {
                 val data = body as Response
                 sqliteClosedHelper.removeAll(Tag(""))
-                sqliteClosedHelper.removeAll(Problem("",""))
+                sqliteClosedHelper.removeAll(Problem("","", "", ""))
                 preferences.putString(AppConstance.TOKEN, data.data.token).apply()
                 sqliteClosedHelper.insertAll(data.data.tags)
                 sqliteClosedHelper.insertAll(data.data.problems)

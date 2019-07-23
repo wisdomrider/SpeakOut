@@ -25,7 +25,15 @@ class HomePageActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         toolbar = findViewById(R.id.toolbar)
-        arrayList = sqliteClosedHelper.getAll(LoginPage.Problem("", ""))
+        try {
+            arrayList = sqliteClosedHelper.getAll(LoginPage.Problem("", "", "",""))
+
+        }catch (e:android.database.SQLException) {
+            for (i in 0..10) {
+              var page =   LoginPage.Problem("Simple Title","Some description of mine","","")
+                arrayList.add(page)
+            }
+        }
         setSupportActionBar(toolbar)
         floatingActionButton = findViewById(R.id.fab)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -55,6 +63,8 @@ class HomePageActivity : BaseActivity() {
         val id = item.itemId
         if (id == R.id.action_logout) {
             logOut()
+        } else {
+
         }
 
         return super.onOptionsItemSelected(item)

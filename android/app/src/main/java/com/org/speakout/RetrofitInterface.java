@@ -1,7 +1,5 @@
 package com.org.speakout;
 
-import android.util.Log;
-
 import com.org.speakout.loginpage.LoginPage;
 import com.org.speakout.model.RegistrationModel;
 
@@ -11,6 +9,8 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface RetrofitInterface {
+
+
 
     @POST("register")
     Call<LoginPage.Response> registerUser(@Body RegistrationModel registrationModel);

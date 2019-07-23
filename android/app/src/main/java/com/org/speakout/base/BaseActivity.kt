@@ -39,7 +39,9 @@ open class BaseActivity : com.wisdomrider.Activities.BaseActivity() {
         preferences = Preferences(this, AppConstance.APP_NAME, 0)
         storage= FirebaseStorage.getInstance()
         sqliteClosedHelper = SqliteClosedHelper(this, AppConstance.APP_NAME)
+
         disableKeyboardAtFirst()
+
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
         val httpClient = OkHttpClient.Builder()
@@ -99,6 +101,7 @@ open class BaseActivity : com.wisdomrider.Activities.BaseActivity() {
             on406: Do? = null,
             onNetworkError: Do? = null
     ): Any {
+
         if (!what.isEmpty())
             showProgessBar(what)
         this.enqueue(object : Callback<T> {
@@ -182,7 +185,7 @@ open class BaseActivity : com.wisdomrider.Activities.BaseActivity() {
 
     fun createTables() {
         sqliteClosedHelper.createTable(LoginPage.Tag(""))
-        sqliteClosedHelper.createTable(LoginPage.Problem("",""))
+        sqliteClosedHelper.createTable(LoginPage.Problem("","", "",""))
     }
 
 
@@ -223,11 +226,11 @@ open class BaseActivity : com.wisdomrider.Activities.BaseActivity() {
     }
 
     companion object {
-        val GALLERY_REQUEST = 256
-        val CAMARA_REQUEST = 109
+        const val GALLERY_REQUEST = 256
+        const val CAMARA_REQUEST = 109
         private var retrofit: Retrofit? = null
-        private val BASE_URL = "http://82c32494.ngrok.io/api/"
-        val MY_PERMISSIONS_REQUEST_LOCATION = 99
+        private val BASE_URL = "http://05430758.ngrok.io/api/"
+        const val MY_PERMISSIONS_REQUEST_LOCATION = 99
     }
 
 
