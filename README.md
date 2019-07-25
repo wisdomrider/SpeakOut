@@ -27,4 +27,4 @@ to the authorized representative.
    ## https://github.com/wisdomrider/SpeakOutWeb
 
 
-## Follow the instructions on how to commit on respective repos
+## Follow the instructions on how to contribute on respective repos
