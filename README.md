@@ -1,4 +1,4 @@
-# SPEAK OUT 
+# SPEAK OUT (ARCHIVED) 
 
 Focusing on social cause our project is about developing a platform where all the issue of social violence, can be post 
 as a complain or request to the representative organization or the representative authority. Different organization, 
@@ -16,27 +16,15 @@ In similar way many other requests, complains can be post on different issues ha
 to the authorized representative.
 
 
-# ANYONE CAN CONTRIBUTE TO THIS PROJECT JUST FOLLOW THIS STEPS
+# IF ANYONE WANT TO CONTRIBUTE TO THIS PROJECT THEN FOLLOW THE LINK
 
-   First clone this project
- 
-## For Android 
+## FOR ANDROID
 
-   application is located in android branch.
-  
-## For WEB
-
-   web application is located in web branch.
+   ## https://github.com/wisdomrider/SpeakOutAndroid
    
-   
-## For development purpose of android 
- ## use https://speakoutt.herokuapp.com/api/ as base url
-  
-# LANGUAGE USED :
+## FOR WEB
 
-  ## NODE.JS
-  ## KOTLIN
-  ## JAVA
+   ## https://github.com/wisdomrider/SpeakOutWeb
 
-For any help contact avishekzone@gmail.com
 
+## Follow the instructions on how to commit on respective repos
